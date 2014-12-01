@@ -88,12 +88,12 @@ d3.csv("data/health.csv", function(error, data) {
                    clicked(d,d.properties.name)
                    });
                
-               function clicked(d,name) {
+               function clicked(d,cname) {
                var x, y, k;
                var text;
                if (d && centered !== d) {
                svg.selectAll(".total").remove();
-               svg.selectAll(".name").remove();
+               svg.selectAll(".cname").remove();
                
                var centroid = path.centroid(d);
                x = centroid[0];
