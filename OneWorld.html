@@ -44,8 +44,10 @@
                 
                 <form>
                     <label><input id="pieradio" type="radio" name="dataset" value="scatterplot" checked> Scatter plot</label>
-                    <label><input id="pieradio" type="radio" name="dataset" value="bar"> Bar Graph</label>
-                     <label><input id="pieradio" type="radio" name="dataset" value="pie"> Pie Graph</label>
+                    <label><input id="pieradio" type="radio" name="dataset" value="bar"> Bar Chart</label>
+                     <label><input id="pieradio" type="radio" name="dataset" value="pie"> Pie Chart</label>
+                     <label><input id="pieradio" type="radio" name="dataset" value="bubble"> Bubble Chart</label>
+                     <label><input id="pieradio" type="radio" name="dataset" value="map"> Map</label>
                 </form>
                 <hr/>
                 
@@ -85,46 +87,30 @@
                     }
                 
                 var testMatch = new mSift('testMatch', 20);
-                testMatch.Data = ["Akili Dada - Kenya",
-                                  "ASFOP - Teega Wende Orphanage: Burkina Faso",
+                testMatch.Data = [
                                   "Batsiranai - Zimbabwe",
                                   "Bitone Children's Center and Troupe: Uganda",
                                   "Bocas School Project: Panama",
-                                  "Build a School in Burma",
                                   "Build a School in India (Mata Balak)",
                                   "CAMME (Center to Help Exploited Youth): DRC",
                                   "COMPALCIHT Association: Nicaragua",
-                                  "Crea+: Brazil",
                                   "El Shadai: Uganda",
                                   "Familia Hope Orphanage: Timor Leste",
-                                  "FDEGL: Nicaragua",
                                   "Foot2Afrika: Tanzania",
                                   "Girls to Women: East Palo Alto",
                                   "Global Chalkboard Project (Victor Hugo School): Haiti",
                                   "Helen Keller Institute: India",
                                   "Hlomelikusasa: South Africa",
-                                  "Ilela and Ngelenge School Committees: Tanzania",
                                   "Jagriti Vihara (Hospital for Hope): India",
                                   "Khulani Special School: South Africa",
-                                  "Kusoma International (LMEF): Kenya",
-                                  "Mubarika Campus: Pakistan",
                                   "Nari Jagran Manch: India",
-                                  "Nirvanavan Foundation: India",
-                                  "Nkomo CBO: South Africa",
-                                  "Partners in Development Foundation (PIDF): Hawaii",
                                   "People First Educational Trust: India",
                                   "P.E.T.I.S.O.S: Argentina",
-                                  "PING: Botswana",
-                                  "Prajna Vihara School: India",
-                                  "Precious Life Foundation: Zimbabwe",
                                   "Siyazigabisa Home of Hope: South Africa",
                                   "St Vincent's Children of Kibera: Kenya",
                                   "Tadeo Torres: Ecuador",
-                                  "Tinga Tinga Secondary School",
-                                  "Topu Honis Shelter Home: Timor Leste",
                                   "Tunaweza Fund (KCBRP): Tanzania",
-                                  "Zakat Foundation of India: India",
-                                  "Zambian Institute for Sustainable Development (ZISD): Zambia"];
+                                  "Zakat Foundation of India: India"];
                                   
                                   testMatch.Create(document.getElementById('partnersearchbox'));
                                   
@@ -158,6 +144,15 @@
                                           barform();
                                       }
                                       
+                                      if (value == "bubble") {
+                                          window.location.href = "bubble.html";
+                                      }
+                                      
+                                      if (value == "map") {
+                                          window.location.href = "MAP.html";
+                                      }
+
+
                                   }
                 
                 loadData();
@@ -173,10 +168,14 @@
                            
                            // ensures data from csv is interpreted as int
                            dataset.forEach(function (d) {
-                                           d.Total_lives_touched = +d.Total_lives_touched;
+                                           d.Total_lives_overall = +d.Total_lives_overall;
+                                           d.Children_overall = +d.Children_overall;
+                                           d.Adults_overall = +d.Adults_overall;
+                                           d.Total_lives_touched_health = +d.Total_lives_touched_health;
+                                           d.Children_health = +d.Children_health;
+                                           d.Adults_health = +d.Adults_health;
                                            d.NUM1 = +d.NUM1;
                                            d.NUM2 = +d.NUM2;
-                                           
                                            });
                            
                            data = dataset;
@@ -260,7 +259,9 @@
                     } else if (currentChart == "pie") {
                         d3.select("#mainsvg").remove();
                         piechart();
-                        
+                    
+                    } else if (currentChart == "map") {
+                        window.location.href = "MAP.html";
                     }
                 }
                 

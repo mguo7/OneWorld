@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <head>
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <style>
+        
+        
+        body {
+            box-sizing: border-box;
+            color:#373737;
+            background: #f2f2f2;
+            font-size: 16px;
+            font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        
+        .stroke {
+            fill: none;
+            stroke: #000;
+            stroke-width: 3px;
+        }
+ 
+        .background {
+            fill: none;
+            pointer-events: all;
+        }
+    
+    .graticule {
+        fill: none;
+        stroke: #777;
+        stroke-width: .5px;
+        stroke-opacity: .5;
+    }
+    
+    #countries {
+        fill: #aaa;
+    }
+    
+    #countries .active {
+        fill: orange;
+    }
+    
+    #country-borders {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 1.5px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        pointer-events: none;
+    }
+    
+        </style>
+
+    </style>
+    </head>
+    <body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+            <h1 id="project_title">One World Project</h1>
+        </header>
+    </div>
+
+    
+    <form>
+        
+       &nbsp;&nbsp;<label><a href="OneWorld.html">Back</a></label>
+    </form>
+    
+    
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+    <script src="javascripts/topojson.v1.min.js"></script>
+    <script src="javascripts/map.js"></script>
+</body>

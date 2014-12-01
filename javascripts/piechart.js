@@ -11,7 +11,7 @@ var radius = Math.min(width, height) / 3;
 
 var pie = d3.layout.pie()
     .value(function (d) {
-        return d.Total_lives_touched;
+        return d.Total_lives_touched_health;
     })
     .sort(null);
 
@@ -36,7 +36,7 @@ var tooltip = d3.select("#main").append("div")
 
 function pieform(){
     var text = '<form>' +
-        '<label><input id="pieselection" type="radio" name="dataset" value="Total_lives_touched" checked> Total_lives_touched</label>' +
+        '<label><input id="pieselection" type="radio" name="dataset" value="Total_lives_touched_health" checked> Total_lives_touched_health</label>' +
         '<label><input id="pieselection" type="radio" name="dataset" value="NUM1"> SERVER1</label>' +
         '<label><input id="pieselection" type="radio" name="dataset" value="NUM2"> SERVER2</label>' +
         '</form>'
@@ -73,7 +73,7 @@ function piechart(){
                                      
                                      if(d.PARTNER_NAME == m){
                                      
-                                     csvdata.push({PARTNER_NAME:d.PARTNER_NAME,Total_lives_touched:d.Total_lives_touched,NUM1:d.NUM1,NUM2:d.NUM2,SERVICE1:d.SERVICE1,SERVICE2:d.SERVICE2})
+                                     csvdata.push({PARTNER_NAME:d.PARTNER_NAME,Total_lives_overall:d.Total_lives_overall,Total_lives_touched_health:d.Total_lives_touched_health,NUM1:d.NUM1,NUM2:d.NUM2,SERVICE1:d.SERVICE1,SERVICE2:d.SERVICE2,Children_health:d.Children_health,Adults_health:d.Adults_health,Children_overall:d.Children_overall,Adults_overall:d.Adults_overall})
                                      }
                                      
                                 })
@@ -158,7 +158,7 @@ function piechart(){
                         .attr("dy", ".5em")
                         .style("text-anchor", "middle")
                         .attr("y",height/2-400)
-                        .text(d.data.Total_lives_touched+" people")
+                        .text(d.data.Total_lives_touched_health+" people")
                         .style("font-size","15px")
                         .attr("font-family","serif")
                         .attr("font-weight","bold");
@@ -169,7 +169,7 @@ function piechart(){
                 .attr("dy", ".5em")
                 .style("text-anchor", "middle")
                 .attr("y",height/2-380)
-                .text(d3.round(100*(d.data.Total_lives_touched/d3.sum(csvdata, function(d) { return d.Total_lives_touched; })))+"%")
+                .text(d3.round(100*(d.data.Total_lives_touched_health/d3.sum(csvdata, function(d) { return d.Total_lives_touched; })))+"%")
                 .style("font-size","15px")
                 .attr("font-family","serif")
                 .attr("text-anchor","middle")
@@ -186,7 +186,7 @@ function piechart(){
                 .attr("dy", ".5em")
                 .style("text-anchor", "middle")
                 .attr("y",height/2-420)
-                .text(d.data.SERVICE2)
+                .text(d.data.SERVICE1)
                 .style("font-size","15px")
                 .attr("font-family","serif")
                 .attr("font-weight","bold");
@@ -281,7 +281,7 @@ function piechart(){
 
         function change() {
             var value = this.value;
-            if(value == "Total_lives_touched"){ opt = 0}
+            if(value == "Total_lives_touched_health"){ opt = 0}
             if(value == "NUM1"){ opt = 1}
             if(value == "NUM2"){ opt = 2}
            
@@ -289,6 +289,7 @@ function piechart(){
             pie.value(function(d) { return d[value]; }); // change the value function
             path = path.data(pie); // compute the new angles
             path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
+           
         }
     });
 }
@@ -296,7 +297,12 @@ function piechart(){
 
 
 function type(d) {
-    d.Total_lives_touched = +d.Total_lives_touched;
+    d.Total_lives_overall = +d.Total_lives_overall;
+    d.Children_overall = +d.Children_overall;
+    d.Adults_overall = +d.Adults_overall;
+    d.Total_lives_touched_health = +d.Total_lives_touched_health;
+    d.Children_health = +d.Children_health;
+    d.Adults_health = +d.Adults_health;
     d.NUM1 = +d.NUM1;
     d.NUM2 = +d.NUM2;
     return d;

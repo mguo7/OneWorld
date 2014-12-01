@@ -291,15 +291,26 @@ function spform(){
     var text = '<form>'+
         <!--Select value for x-axis:-->
         '<select id="xList" onchange="chooseCategory()">'+
-            '<option value="NUM1" selected>SERVER1</option>'+
+            '<option value="Children_health" selected>Children_health</option>'+
+            '<option value="Adults_health">Adults_health</option>'+
+            '<option value="Total_lives_touched_health">Total_lives_touched_health</option>'+
+            '<option value="Children_overall">Children_overall</option>'+
+            '<option value="Adults_overall">Adults_health_overall</option>'+
+            '<option value="Total_lives_overall">Total_lives_touched_overall</option>'+
+            '<option value="NUM1">SERVER1</option>'+
             '<option value="NUM2">SERVER2</option>'+
-            '<option value="Total_lives_touched">Total_live</option>'+
     '</select>'+
     <!--Select value for y-axis:-->
         '<select id="yList" onchange="chooseCategory()">'+
+        '<option value="Total_lives_touched_health" selected>Total_lives_touched_health</option>'+
+        '<option value="Children_health">Children_health</option>'+
+        '<option value="Adults_health">Adults_health</option>'+
+        '<option value="Children_overall">Children_overall</option>'+
+        '<option value="Adults_overall">Adults_health_overall</option>'+
+        '<option value="Total_lives_touched_health">Total_lives_touched_health</option>'+
         '<option value="NUM1">SERVER1</option>'+
         '<option value="NUM2"selected>SERVER2</option>'+
-        '<option value="Total_lives_touched">Total_live</option>'+
+        '<option value="Total_lives_overall">Total_lives_touched_overall</option>'+
         '</select>'+
         '</form>';
     document.getElementById("selection").innerHTML=text;

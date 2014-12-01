@@ -3,8 +3,8 @@
  */
 
 var barsort = 0;
-var barvar = "Total_lives_touched";
-var barname = "Total_lives_touched";
+var barvar = "Children_health";
+var barname = "Children_health";
 
 function barChart() {
     
@@ -16,7 +16,19 @@ function barChart() {
     var formatPercent = d3.format(".0%");
     
     var xValue = function (d) {
-        return d.PARTNER_NAME;
+        barvar = document.getElementById("barSelect")
+        .options[barSelect.selectedIndex].value;
+        
+     /**   if(barvar=="NUM1") {
+        
+            return d.SERVICE1;
+        
+        } else if (barvar=="NUM1") {
+        
+            return d.SERVER2;
+        } **/
+        
+            return d.PARTNER_NAME;
     }, // data -> value
     xScale = d3.scale.ordinal().rangeRoundBands([0, width], .1), // value -> display
     xMap = function (d) {
@@ -55,7 +67,12 @@ function barChart() {
            }
            // ensures data from csv is interpreted as int
            data.forEach(function (d) {
-                        d.Total_lives_touched = +d.Total_lives_touched;
+                        d.Total_lives_overall = +d.Total_lives_overall;
+                        d.Children_overall = +d.Children_overall;
+                        d.Adults_overall = +d.Adults_overall;
+                        d.Total_lives_touched_health = +d.Total_lives_touched_health;
+                        d.Children_health = +d.Children_health;
+                        d.Adults_health = +d.Adults_health;
                         d.NUM1 = +d.NUM1;
                         d.NUM2 = +d.NUM2;
                         });
@@ -124,12 +141,19 @@ function barChart() {
            
            });
     
-    d3.selectAll("rect")
+    
     
     
     
     function type(d) {
-        d.Total_lives_touched = +d.Total_lives_touched;
+        d.Total_lives_overall = +d.Total_lives_overall;
+        d.Children_overall = +d.Children_overall;
+        d.Adults_overall = +d.Adults_overall;
+        d.Total_lives_touched_health = +d.Total_lives_touched_health;
+        d.Children_health = +d.Children_health;
+        d.Adults_health = +d.Adults_health;
+        d.NUM1 = +d.NUM1;
+        d.NUM2 = +d.NUM2;
         return d;
     }
 }
@@ -138,9 +162,14 @@ function barChart() {
 function barform() {
     var text = '<form>' +
     '<select id="barSelect" onchange="barChooseCategory()">' +
-    '<option value="Total_lives_touched">Total_lives_touched</option>' +
-    '<option value="NUM1">SERVER1</option>' +
-    '<option value="NUM2">SERVER2</option>' +
+    '<option value="Children_health" selected>Children_health</option>'+
+    '<option value="Adults_health">Adults_health</option>'+
+    '<option value="Total_lives_touched_health">Total_lives_touched_health</option>'+
+    '<option value="Children_overall">Children_overall</option>'+
+    '<option value="Adults_overall">Adults_overall</option>'+
+    '<option value="Total_lives_overall">Total_lives_touched_overall</option>'+
+    '<option value="NUM1">SERVER1</option>'+
+    '<option value="NUM2">SERVER2</option>'+
     '</select>' +
     '<input type="button" name="button" value="sort" onclick="sortBars()"/>' +
     '<input type="button" name="button" value="reset" onclick="resetBars()"/>' +
