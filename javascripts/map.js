@@ -102,9 +102,9 @@ d3.csv("data/health.csv", function(error, data) {
                centered = d;
                
                 text = svg.append("text")
-               .attr("class","name")
+               .attr("class","cname")
                .style("text-anchor", "middle")
-               .text("Country: "+ name)
+               .text("Country: "+ cname)
                .style("font-size","20px")
                .attr("font-family","serif")
                .attr("x",650)
@@ -119,7 +119,7 @@ d3.csv("data/health.csv", function(error, data) {
                      
                      data.forEach(function(m){
                                   
-                                  if(m.Country == name) {
+                                  if(m.Country == cname) {
                                   local_value = local_value + m.Total_lives_touched_health;
                                   }
                                   });
@@ -139,7 +139,7 @@ d3.csv("data/health.csv", function(error, data) {
                y = height / 2;
                k = 1;
                svg.selectAll(".total").remove();
-               svg.selectAll(".name").remove();
+               svg.selectAll(".cname").remove();
                centered = null;
                
                }
