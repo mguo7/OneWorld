@@ -242,9 +242,10 @@ function selectregion() {
     
     function change() {
         reigon = this.value;
+        d3.select("#mainsvg").remove();
+        barChart();
     }
     
-    d3.select("#mainsvg").remove();
-    barChart();
+    
 
 }
