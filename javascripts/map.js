@@ -18,12 +18,10 @@ var svg = d3.select("body").append("svg")
 
 
 var map_color = d3.scale.linear()
-.domain([0,0.65, 1])
-.range(["yellow","orange", "red"]);
+.domain([0,0.5, 1])
+.range(["#f7fb95","#fc8d5c", "#eb2005"]);
 
-var map_color_rev = d3.scale.linear()
-.domain([0,0.5, 1.0])
-.range(["yellow","orange", "red"]);
+
 
 
 var g = svg.append("g");
@@ -171,11 +169,11 @@ var gradient = svg.append("linearGradient")
 
 gradient.append("stop")
 .attr("offset", "0")
-.attr("stop-color", "red");
+.attr("stop-color", "#eb2005");
 
 gradient.append("stop")
 .attr("offset", "0.8")
-.attr("stop-color", "yellow");
+.attr("stop-color", "#f7fb95");
 
 svg.selectAll("rect")
 .data(data)

@@ -5,6 +5,7 @@
 var barsort = 0;
 var barvar = "Children_health";
 var barname = "Children_health";
+var reigon = "All";
 
 function barChart() {
     
@@ -53,6 +54,28 @@ function barChart() {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     d3.csv("data/health.csv", type, function (error, data) {
+           
+           
+           var bardata = [];
+           
+           
+           data.forEach(function(d){
+                        
+                        
+                        if(reigon=="All") {
+                        
+                        bardata.push({PARTNER_NAME:d.PARTNER_NAME,Total_lives_overall:d.Total_lives_overall,Total_lives_touched_health:d.Total_lives_touched_health,NUM1:d.NUM1,NUM2:d.NUM2,SERVICE1:d.SERVICE1,SERVICE2:d.SERVICE2,Children_health:d.Children_health,Adults_health:d.Adults_health,Children_overall:d.Children_overall,Adults_overall:d.Adults_overall})
+                        
+                        } else {
+                        
+                        if(d.REGION == reigon){
+                        
+                        bardata.push({PARTNER_NAME:d.PARTNER_NAME,Total_lives_overall:d.Total_lives_overall,Total_lives_touched_health:d.Total_lives_touched_health,NUM1:d.NUM1,NUM2:d.NUM2,SERVICE1:d.SERVICE1,SERVICE2:d.SERVICE2,Children_health:d.Children_health,Adults_health:d.Adults_health,Children_overall:d.Children_overall,Adults_overall:d.Adults_overall})
+                        } // d.REIGON
+                        
+                        } // else
+                        
+                        })
            
            if (barsort == 1) {
            data.sort(function (a, b) {
@@ -103,7 +126,7 @@ function barChart() {
            
            
            svg.selectAll(".bar")
-           .data(data)
+           .data(bardata)
            .enter().append("rect")
            .transition().duration(500)
            .attr("class", function (d) {
@@ -144,7 +167,6 @@ function barChart() {
     
     
     
-    
     function type(d) {
         d.Total_lives_overall = +d.Total_lives_overall;
         d.Children_overall = +d.Children_overall;
@@ -156,6 +178,10 @@ function barChart() {
         d.NUM2 = +d.NUM2;
         return d;
     }
+    
+    
+    
+
 }
 
 
@@ -173,6 +199,10 @@ function barform() {
     '</select>' +
     '<input type="button" name="button" value="sort" onclick="sortBars()"/>' +
     '<input type="button" name="button" value="reset" onclick="resetBars()"/>' +
+    '<label><input id="barselection" type="radio" name="dataset" value="All" onclick="selectregion()" checked> All</label>' +
+    '<label><input id="barselection" type="radio" name="dataset" value="Americas" onclick="selectregion()"> Americas</label>' +
+    '<label><input id="barselection" type="radio" name="dataset" value="Africa" onclick="selectregion()"> Africa</label>' +
+    '<label><input id="barselection" type="radio" name="dataset" value="Asia" onclick="selectregion()"> Asia</label>' +
     '</form>';
     document.getElementById("selection").innerHTML = text;
 }
@@ -194,6 +224,8 @@ function resetBars() {
 }
 
 function sortBars() {
+    
+    
     if (barsort == 0 || barsort == 2) {
         barsort = 1;
     }
@@ -202,4 +234,17 @@ function sortBars() {
     }
     d3.select("#mainsvg").remove();
     barChart();
+}
+
+function selectregion() {
+    d3.selectAll("#barselection")
+    .on("change", change);
+    
+    function change() {
+        reigon = this.value;
+    }
+    
+    d3.select("#mainsvg").remove();
+    barChart();
+
 }
